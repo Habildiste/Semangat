@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Buat Kamu yang Hebat 💖</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(to bottom right, #ffe4e1, #f9c2ff);
+      color: #4b004b;
+      text-align: center;
+      padding: 40px;
+      overflow: hidden;
+      position: relative;
+    }
+    #box {
+      font-size: 22px;
+      background: #fff0f5;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: auto;
+      white-space: pre-line;
+      min-height: 120px;
+      transition: all 0.5s ease;
+    }
+    button {
+      margin-top: 30px;
+      padding: 12px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+    button:hover {
+      background-color: #ff1493;
+      transform: scale(1.05);
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    .love {
+      position: absolute;
+      color: #ff4da6;
+      font-size: 24px;
+      animation: fall 5s linear infinite;
+      user-select: none;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1;}
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0;}
+    }
+    .dino {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      width: 120px;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3">
+  </audio>
+  <script>
+    for (let i = 0; i < 20; i++) {
+      let love = document.createElement('div');
+      love.className = 'love';
+      love.innerText = '✨';
+      love.style.left = Math.random() * 100 + 'vw';
+      love.style.animationDuration = (3 + Math.random() * 3) + 's';
+      document.body.appendChild(love);
+    }
+  </script>
+  <img src="https://media.tenor.com/IclgYBBa07kAAAAi/yellow-dino.gif" alt="Dino Gemoy" class="dino">
+  <div id="box">.</div>
+  <button id="nextBtn" onclick="nextText()">Klik untuk Lanjut ➜</button>
+  <script>
+    const teks = [
+      "Hai kamu 😊",
+      "Aku cuma mau bilang satu hal...",
+      "Kamu itu hebat banget. Serius.",
+      "Kadang kamu suka ragu sama diri sendiri...",
+      "Padahal aku liat kamu berjuang tiap hari. Keren banget.",
+      "Boleh capek, boleh sedih... tapi jangan lupa istirahat ya.",
+      "Kamu berharga. Kamu penting.",
+      "Dan yang paling penting...",
+      "Aku bangga banget sama kamu 😌",
+      "Jangan nyerah ya. Kamu nggak sendirian 💛",
+      "Semangat terus ya, orang hebat 💖"
+    ];
+    let i = 0;
+    const box = document.getElementById("box");
+    const nextBtn = document.getElementById("nextBtn");
+    function nextText() {
+      if (i < teks.length) {
+        ketik(teks[i], () => { i++; });
+      } else {
+        nextBtn.style.display = "none";
+        ketik("Itu aja sih...\nTetap jadi versi terbaik dari dirimu, ya 🌼");
+      }
+    }
+    function ketik(teks, callback) {
+      let index = 0;
+      box.innerText = "";
+      const interval = setInterval(() => {
+        box.innerText += teks.charAt(index);
+        index++;
+        if (index === teks.length) {
+          clearInterval(interval);
+          if (callback) callback();
+        }
+      }, 40);
+    }
+    ketik(teks[i], () => { i++; });
+  </script>
+</body>
+</html>
